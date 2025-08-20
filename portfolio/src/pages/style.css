@@ -1,0 +1,261 @@
+/* =========================
+   RESET BÁSICO
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #333;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header img {
+  height: 40px;
+}
+
+header nav {
+  display: flex;
+  gap: 2rem;
+}
+
+header nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight:600;
+  transition: color 0.3s;
+}
+
+header nav a:hover {
+  color: #00777f;
+}
+
+header button {
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #0077ff;
+  background: #000;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+header button:hover {
+  background: #333;
+}
+
+header button img {
+  width: 20px;
+  height: 20px;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #f0f4ff, #ffffff);
+ 
+}
+
+.hero img {
+  max-width: 220px;
+  margin-bottom: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.hero h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0 1rem;
+  color: #333;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.hero button {
+  padding: 0.7rem 1.5rem;
+  background: #333;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.hero button:hover {
+  background: #333;
+}
+
+/* =========================
+   ABOUT
+========================= */
+.About-Me {
+  padding: 3rem 2rem;
+  background: #fff;
+  text-align: center;
+}
+
+.About-Me h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.About-Me h5 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.About-Me p {
+  max-width: 800px;
+  margin: 0.5rem auto;
+  color: #444;
+}
+
+.About-Me button {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* =========================
+   WHAT I DO (SERVICES)
+========================= */
+.Wait-do {
+  padding: 3rem 2rem;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.Wait-do h2 {
+  font-size: 2rem;
+}
+
+.Wait-do h5 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.group-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.wrapper-car {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wrapper-car > div {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  text-align: left;
+  transition: transform 0.3s;
+}
+
+.wrapper-car > div:hover {
+  transform: translateY(-5px);
+}
+
+.wrapper-car h5 {
+  margin: 1rem 0 0.5rem;
+  color: #333;
+}
+
+/* =========================
+   PROJECTS
+========================= */
+.Projects {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: #fff;
+}
+
+.Projects h2 {
+  font-size: 2rem;
+}
+
+.Projects h5 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.Projects nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.Projects nav button {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid #333;
+  background: transparent;
+  color: #333;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.Projects nav button:hover {
+  background: #333;
+  color: #fff;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+@media (max-width: 768px) {
+  header nav {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .wrapper-car {
+    flex-direction: column;
+    align-items: center;
+  }
+}
