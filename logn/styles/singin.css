@@ -1,0 +1,46 @@
+@import url("./global.css");
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+section {
+  width: 49.2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  border: 1px solid green;
+}
+
+h1 {
+    color: #000;
+    font-size: 32px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+}
+.form-container > p {
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    margin-top: 22px;
+}
+
+form {
+    border: 1px solid red;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+img {
+  border: 1px solid blue;
+  width: 50.8%;
+}
