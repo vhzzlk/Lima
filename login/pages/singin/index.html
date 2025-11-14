@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/singin.css" />
+    <title>Sing In</title>
+  </head>
+  <body>
+    <main>
+      <section class="left">
+        <div class="form-container">
+
+            <h1>Welcome back!</h1>
+            
+            <p>Enter your Credentials to access your account</p>
+            
+            <form action="" method="post">
+                <fieldset>
+                    <label for="email">Email address</label>
+                    <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    />
+                </fieldset>
+                <fieldset>
+                    <div class="title-wrapper">
+                        <label for="password">Password</label>
+                        <a class="forgot" href="#">Forgot password?</a>
+                    </div>
+                    <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    />
+                </fieldset>
+                <fieldset class="checkbox-fieldset">
+                    <input type="checkbox" name="remember" id="remember" />
+            <label for="remember">Remember for 30 days</label>
+        </fieldset>
+          <button type="submit">Login</button>
+        </form>
+
+        <!-- separador OR -->
+        <div class="or-row" aria-hidden="true">
+          <span class="line"></span>
+          <span class="or-text">or</span>
+          <span class="line"></span>
+        </div>
+
+        <!-- botões de login social -->
+        <div class="socials">
+          <button class="social-btn google" type="button">
+            <img src="../../assets/images/google-logo.svg" alt="Google logo" />
+            <span>Sign in with Google</span>
+          </button>
+
+          <button class="social-btn apple" type="button">
+            <img src="../../assets/images/apple-logo.svg" alt="Apple logo" />
+            <span>Sign in with Apple</span>
+          </button>
+        </div>
+
+        <div class="alt-actions">
+          <p class="no-account">Don't have an account? <a href="../singup/index.html">Sign Up</a></p>
+        </div>
+    </div>
+    </section>
+
+    <aside class="hero">
+      <img
+        src="../../assets/images/costela-de-adao.png"
+        alt="Planta costela de adão"
+      />
+    </aside>
+</main>
+    <script>
+      window.__API_BASE_URL__ = 'http://localhost:8080';
+    </script>
+
+<script src="../../scripts/api.js"></script>
+<script src="../../scripts/signin.js"></script>
+</body>
+</html>

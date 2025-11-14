@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dashboard</title>
+    <style>
+        :root{
+            --bg:#0f1724; --surface:#0b1220; --muted:#94a3b8; --accent:#06b6d4;
+            --card:#0f1728; --glass: rgba(255,255,255,0.03);
+            --radius:12px; color-scheme: dark;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0; background:linear-gradient(180deg,#071027 0%, #041022 100%); color:#e6eef8;
+            font-size:14px; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+        }
+
+        .layout{
+            display:grid; grid-template-columns:260px 1fr; gap:20px; padding:20px; min-height:100vh;
+        }
+
+        /* Sidebar */
+        .sidebar{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+            border-radius:var(--radius); padding:18px; box-shadow:0 6px 18px rgba(2,6,23,0.6);
+        }
+        .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+        .logo{
+            width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#8b5cf6);
+            display:flex;align-items:center;justify-content:center;font-weight:700;color:#021018;
+        }
+        .brand h1{font-size:16px;margin:0}
+        nav{display:flex;flex-direction:column;gap:6px}
+        .nav-item{
+            display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;color:var(--muted);
+            text-decoration:none;cursor:pointer;
+        }
+        .nav-item:hover{background:var(--glass); color:#fff}
+        .nav-item.active{background:linear-gradient(90deg, rgba(6,182,212,0.12), rgba(139,92,246,0.08)); color:#fff}
+
+        /* Main area */
+        .main{
+            display:flex;flex-direction:column;gap:20px;
+        }
+        .topbar{
+            display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;
+            background:transparent;
+        }
+        .search{
+            background:var(--card); padding:10px 12px; border-radius:10px; display:flex;gap:8px;align-items:center;
+            min-width:240px;color:var(--muted);
+        }
+        .user{
+            display:flex;gap:12px;align-items:center;
+        }
+        .avatar{
+            width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#334155,#0ea5a4);
+            display:flex;align-items:center;justify-content:center;font-weight:600;color:#041018;
+        }
+
+        /* Grid and cards */
+        .grid{
+            display:grid;grid-template-columns:repeat(12,1fr);gap:16px;
+        }
+        .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:16px;border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,0.45)}
+        .col-3{grid-column:span 3}
+        .col-9{grid-column:span 9}
+        .col-6{grid-column:span 6}
+        .stats{display:flex;justify-content:space-between;align-items:center}
+        .value{font-size:20px;font-weight:700}
+        .label{color:var(--muted);font-size:12px}
+
+        /* Table */
+        table{width:100%;border-collapse:collapse;margin-top:6px}
+        th,td{padding:10px 8px;text-align:left;font-size:13px}
+        thead th{color:var(--muted);font-size:12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+        tbody tr:hover{background:rgba(255,255,255,0.02)}
+        .chip{padding:6px 10px;border-radius:999px;font-size:12px;background:rgba(255,255,255,0.03);display:inline-block}
+
+        /* Responsive */
+        @media(max-width:900px){
+            .layout{grid-template-columns:1fr; padding:12px}
+            .col-3,.col-6,.col-9{grid-column:span 12}
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar" role="navigation" aria-label="Barra lateral">
+            <div class="brand">
+                <div class="logo">DL</div>
+                <div>
+                    <h1>Dashboard</h1>
+                    <div style="font-size:12px;color:var(--muted)">Bem-vindo, Victor</div>
+                </div>
+            </div>
+
+            <nav>
+                <a class="nav-item active"><span>🏠</span>Visão Geral</a>
+                <a class="nav-item"><span>📈</span>Relatórios</a>
+                <a class="nav-item"><span>👥</span>Usuários</a>
+                <a class="nav-item"><span>⚙️</span>Configurações</a>
+            </nav>
+
+            <div style="margin-top:18px;color:var(--muted);font-size:13px">Atalhos</div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="chip">Novo</button>
+                <button class="chip">Importar</button>
+            </div>
+        </aside>
+
+        <main class="main" role="main">
+            <div class="topbar">
+                <div style="display:flex;gap:12px;align-items:center">
+                    <div class="search" role="search" aria-label="Pesquisar">
+                        <span style="opacity:0.7">🔎</span>
+                        <input id="search" placeholder="Pesquisar..." style="background:transparent;border:0;outline:0;color:inherit;width:160px" />
+                    </div>
+                    <div style="display:flex;gap:8px">
+                        <div class="chip" id="dateRange">Últimos 7 dias ▾</div>
+                        <div class="chip" id="themeToggle">Tema</div>
+                    </div>
+                </div>
+
+                <div class="user">
+                    <div style="text-align:right">
+                        <div style="font-size:13px">Victor Lima</div>
+                        <div style="color:var(--muted);font-size:12px">Administrador</div>
+                    </div>
+                    <div class="avatar">V</div>
+                </div>
+            </div>
+
+            <section class="grid">
+                <div class="card col-3">
+                    <div class="stats">
+                        <div>
+                            <div class="label">Usuários Ativos</div>
+                            <div class="value" id="usersCount">1.248</div>
+                        </div>
+                        <div style="background:rgba(6,182,212,0.12);color:var(--accent);padding:8px;border-radius:8px;font-weight:700">+6%</div>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="stats">
+                        <div>
+                            <div class="label">Novos Cadastros</div>
+                            <div class="value" id="newSignups">76</div>
+                        </div>
+                        <div style="background:rgba(139,92,246,0.08);color:#8b5cf6;padding:8px;border-radius:8px;font-weight:700">+2</div>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="stats">
+                        <div>
+                            <div class="label">Conversões</div>
+                            <div class="value" id="conversions">3.8%</div>
+                        </div>
+                        <div style="background:rgba(34,197,94,0.08);color:#86efac;padding:8px;border-radius:8px;font-weight:700">↗︎</div>
+                    </div>
+                </div>
+
+                <div class="card col-3">
+                    <div class="stats">
+                        <div>
+                            <div class="label">Receita (Últimos 7d)</div>
+                            <div class="value" id="revenue">$12.4k</div>
+                        </div>
+                        <div style="background:rgba(248,113,113,0.06);color:#fda4af;padding:8px;border-radius:8px;font-weight:700">-1%</div>
+                    </div>
+                </div>
+
+                <div class="card col-9" style="display:flex;flex-direction:column;gap:12px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <div>
+                            <div style="font-weight:700">Atividade</div>
+                            <div class="label">Visitas, cadastros e conversões</div>
+                        </div>
+                        <div class="label">Últimos 30 dias</div>
+                    </div>
+                    <canvas id="chart" height="160" style="width:100%;border-radius:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)"></canvas>
+                </div>
+
+                <div class="card col-3">
+                    <div style="font-weight:700">Tarefas</div>
+                    <div style="margin-top:10px;color:var(--muted)">3 pendentes</div>
+                    <ul style="margin:12px 0 0 14px;color:var(--muted)">
+                        <li>Revisar relatórios</li>
+                        <li>Aprovar cadastros</li>
+                        <li>Backup de dados</li>
+                    </ul>
+                </div>
+
+                <div class="card col-6">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                        <div style="font-weight:700">Usuários recentes</div>
+                        <div style="color:var(--muted);font-size:13px">Últimas 24h</div>
+                    </div>
+                    <table aria-label="Tabela de usuários">
+                        <thead>
+                            <tr><th>Nome</th><th>Email</th><th>Plano</th><th>Status</th></tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr><td>Ana Silva</td><td>ana@example.com</td><td>Premium</td><td><span class="chip">Ativo</span></td></tr>
+                            <tr><td>Bruno Costa</td><td>bruno@example.com</td><td>Grátis</td><td><span class="chip">Ativo</span></td></tr>
+                            <tr><td>Carla Mendes</td><td>carla@example.com</td><td>Pro</td><td><span class="chip">Pendente</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card col-6">
+                    <div style="font-weight:700">Logs recentes</div>
+                    <div style="margin-top:8px;color:var(--muted);font-size:13px">Ações do sistema</div>
+                    <ul style="margin-top:12px;color:var(--muted);font-size:13px;line-height:1.8">
+                        <li>03:12 — Backup automático concluído</li>
+                        <li>01:44 — Novo registro aprovado (Bruno)</li>
+                        <li>00:20 — Erro 502 em /api/payments</li>
+                    </ul>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple line chart (vanilla canvas)
+        (function(){
+            const canvas = document.getElementById('chart');
+            const ctx = canvas.getContext('2d');
+            function draw(data){
+                const dpr = window.devicePixelRatio || 1;
+                const w = canvas.clientWidth;
+                const h = canvas.height;
+                canvas.width = w * dpr; canvas.height = h * dpr;
+                ctx.scale(dpr,dpr);
+                ctx.clearRect(0,0,w,h);
+
+                // background gradient
+                const grad = ctx.createLinearGradient(0,0,0,h);
+                grad.addColorStop(0,'rgba(6,182,212,0.12)');
+                grad.addColorStop(1,'rgba(139,92,246,0.03)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0,0,w,h);
+
+                const padding = 30;
+                const usableW = w - padding*2;
+                const usableH = h - padding*2;
+                const max = Math.max(...data);
+                const min = Math.min(...data);
+
+                // draw line
+                ctx.beginPath();
+                data.forEach((v,i)=>{
+                    const x = padding + (i/(data.length-1))*usableW;
+                    const y = padding + (1 - (v-min || 0)/(max-min || 1))*usableH;
+                    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+                });
+                ctx.strokeStyle = '#06b6d4';
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+
+                // fill area
+                ctx.lineTo(padding+usableW, padding+usableH);
+                ctx.lineTo(padding, padding+usableH);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(6,182,212,0.08)';
+                ctx.fill();
+
+                // small circles
+                data.forEach((v,i)=>{
+                    const x = padding + (i/(data.length-1))*usableW;
+                    const y = padding + (1 - (v-min || 0)/(max-min || 1))*usableH;
+                    ctx.beginPath();
+                    ctx.fillStyle = '#fff';
+                    ctx.arc(x,y,3,0,Math.PI*2);
+                    ctx.fill();
+                    ctx.strokeStyle = 'rgba(2,6,23,0.6)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                });
+            }
+
+            // sample data (simulated past 30 days)
+            const data = Array.from({length:30},(_,i)=> Math.round(200 + 200*Math.sin(i/4) + Math.random()*80));
+            draw(data);
+
+            // responsive redraw
+            window.addEventListener('resize', ()=>draw(data));
+        })();
+
+        // Small interactions
+        document.getElementById('themeToggle').addEventListener('click', ()=>{
+            const el = document.documentElement;
+            if(el.style.filter){
+                el.style.filter = '';
+                document.getElementById('themeToggle').textContent = 'Tema';
+            } else {
+                el.style.filter = 'invert(0.96) hue-rotate(180deg)';
+                document.getElementById('themeToggle').textContent = 'Claro';
+            }
+        });
+
+        // Simple search filter for the users table
+        document.getElementById('search').addEventListener('input', function(){
+            const q = this.value.toLowerCase().trim();
+            const rows = document.querySelectorAll('#usersTable tr');
+            rows.forEach(tr=>{
+                tr.style.display = (q === '' || tr.textContent.toLowerCase().includes(q)) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html></ul></div>
